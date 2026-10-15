@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-green
+  labels:
+    version: green
+    app: nginx
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      version: green
+      app: nginx
+  # Pod
+  template:
+    metadata:
+      labels:
+        version: green
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: ramdocker22/blue-green:0.2.0
+        ports:
+        - containerPort: 80
+---
